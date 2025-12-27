@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Bingo Tournament</title>
+
+    <link rel="icon" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+    <!-- ================= LOBBY ================= -->
+    <div id="lobby">
+      <h1>🎲 Bingo Lobby</h1>
+
+      <div id="join">
+        <input id="name" placeholder="ชื่อผู้เล่น">
+        <input id="room" placeholder="รหัสห้อง">
+        <button onclick="join()">เข้าห้อง</button>
+      </div>
+      <div id="lobbyList">
+        <p>ยังไม่มีห้อง</p>
+      </div>
+    </div>
+
+    <!-- ================= GAME ================= -->
+    <div id="game" style="display:none">
+
+      <h1>🎉 Bingo Tournament</h1>
+
+      <button id="leaveBtn" onclick="leaveRoom()" style="display:none">
+        🚪 ออกจากห้อง
+      </button>
+
+      <h2 id="role"></h2>
+      <h2 id="timer">⏱️ 00:00</h2>
+
+      <button onclick="ready()">✅ พร้อมแล้ว</button>
+      <p id="readyStatus"></p>
+
+      <!-- HOST ONLY -->
+      <button id="startBtn" onclick="startGame()">🚦 เริ่มการแข่งขัน</button>
+      <button id="drawBtn" onclick="draw()">🎰 สุ่มเลข</button>
+
+      <p id="current"></p>
+      <div id="board"></div>
+
+      <h3>📜 เลขที่ออกแล้ว</h3>
+      <div id="history"></div>
+
+      <button onclick="toggleSound()" id="soundBtn">🔊</button>
+
+      <!-- ===== CHAT (เฉพาะในเกม) ===== -->
+      <div id="chatToggle" onclick="toggleChat()">
+        💬 <span id="chatNotify"></span>
+      </div>
+
+      <div id="chatWindow">
+        <div id="chatHeader">
+          💬 ห้องแชท
+          <span onclick="toggleChat()">✕</span>
+        </div>
+
+        <div id="chatMessages"></div>
+
+        <div id="chatInputBox">
+          <input id="chatInput" placeholder="พิมพ์ข้อความ...">
+          <button onclick="sendChat()">ส่ง</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= CHAMPION ================= -->
+    <div id="champion" style="display:none">
+      <div class="champion-card">
+        <div class="trophy">🏆</div>
+        <h1>CHAMPION</h1>
+
+        <h2 id="championName"></h2>
+        <p id="championTime"></p>
+
+        <h3>📊 Leaderboard</h3>
+        <ol id="leaderboard" class="medal-board"></ol>
+
+        <h3>🎯 กระดานผู้ชนะ</h3>
+        <div id="winBoard"></div>
+
+        <p style="font-weight:bold;color:#2e7d32">
+          👑 ผู้ชนะจะได้เป็น Host รอบถัดไป
+        </p>
+
+        <button onclick="playAgain()">🔁 เล่นรอบใหม่ (Host)</button>
+      </div>
+    </div>
+
+    <!-- ================= EFFECTS ================= -->
+    <canvas id="confetti"></canvas>
+    <canvas id="fireworks"></canvas>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
